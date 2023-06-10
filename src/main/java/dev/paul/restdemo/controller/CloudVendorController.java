@@ -20,7 +20,7 @@ public class CloudVendorController {
     }
 
     // Read Specific Cloud Vendor Details
-    @GetMapping("/{vendorId}")
+    @GetMapping("/id/{vendorId}")
     public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId) {
         return ResponseHandler.responseBuilder("Requested vendor details are given here",
                 HttpStatus.OK, cloudVendorService.getCloudVendor(vendorId));
@@ -30,6 +30,12 @@ public class CloudVendorController {
     @GetMapping
     public List<CloudVendor>  getAllCloudVendorDetails() {
         return cloudVendorService.getAllCloudVendors();
+    }
+
+    // Read cloud vendor by name
+    @GetMapping("/name/{vendorName}")
+    public ResponseEntity<?> getCloudVendorByName(@PathVariable("vendorName") String vendorName){
+        return new ResponseEntity<>(cloudVendorService.getByVendorName(vendorName),HttpStatus.OK);
     }
 
     // create cloud Vendor
